@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import NewList from './components/NewList.vue'
+import ListItem from './components/ListItem.vue'
 
 Vue.use(Router)
 
@@ -10,8 +11,14 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'NewList',
+      component: NewList
+    },
+    {
+      path: '/lists/:listId',
+      name: 'ListItem',
+      component: ListItem,
+      props: true
     },
     {
       path: '/about',
