@@ -17,8 +17,7 @@ export default new Router({
     {
       path: '/lists/:listId',
       name: 'ListItem',
-      component: ListItem,
-      props: true
+      component: ListItem
     },
     {
       path: '/about',
