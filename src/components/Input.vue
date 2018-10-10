@@ -2,7 +2,7 @@
   <div class="input">
     <div class="input__decor-padding"></div>
     <div class="input__input-wrapper">
-       <input class="input__field" v-model="newTodo" type="text" placeholder="What needs to be done?">
+       <input class="input__field" @keyup.enter="create" v-model="title" type="text" placeholder="What needs to be done?">
     </div>
     
   </div>
@@ -14,15 +14,23 @@ export default {
   props: ["list"],
   data: function() {
     return {
-      newTodo: ""
+      title: ""
     };
+  },
+  methods: {
+    create: function() {
+      let entry = this.title.trim();
+      if (entry) {
+        this.$emit("added", entry);
+      }
+    }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import "@/sass/variables.scss";
+@import "@/assets/scss/main.scss";
 .input {
   &__decor-padding {
     width: 100%;
@@ -74,6 +82,7 @@ export default {
     width: 100%;
     font-style: italic;
     border-left: 1px solid $brown-border-color;
+    outline: none;
     &::placeholder {
       color: $grey-text-color;
     }

@@ -33,8 +33,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./sass/common.scss";
-@import "./sass/variables.scss";
+@import "@/assets/scss/main.scss";
 .container {
   max-width: 960px;
   margin-left: auto;

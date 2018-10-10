@@ -5,7 +5,7 @@
         {{list.name}} 
     </h2>
     <div class="list__content">
-      <Input v-bind:list="list"/>
+      <Input @added="createTodo" v-bind:list="list"/>
       <ul class="todos">
         <TodoItem v-for="todo in list.todos" v-bind:key="todo.todoId" v-bind:todo="todo"/>
       </ul>
@@ -46,6 +46,9 @@ export default {
     findList: function(id) {
       this.id = Number(id);
       return Store.findList(this.id);
+    },
+    createTodo: function(title) {
+      Store.addTodo(this.id, title);
     }
   },
   computed: {

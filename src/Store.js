@@ -2,6 +2,14 @@ export default {
     findList: function (id) {
         return this.lists.find(el => el.listId == id);
     },
+    addTodo: function (id, title) {
+        this.findList(id).todos.push({
+            todoId: new Date().getTime(),
+            title: title,
+            checked: false,
+            editing: false
+        });
+    },
     lists: [
         {
             name: "I'm first",
