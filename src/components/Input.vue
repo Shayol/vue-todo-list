@@ -2,6 +2,7 @@
   <div class="input">
     <div class="input__decor-padding"></div>
     <div class="input__input-wrapper">
+        <div class="input__left-icon"></div>
        <input class="input__field" @keyup.enter="create" v-model="title" type="text" placeholder="What needs to be done?">
     </div>
     
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import Store from "@/Store.js";
 export default {
   name: "Input",
   props: ["list"],
@@ -21,7 +23,8 @@ export default {
     create: function() {
       let entry = this.title.trim();
       if (entry) {
-        this.$emit("added", entry);
+        Store.addTodo(this.list.listId, this.title);
+        this.title = "";
       }
     }
   }
@@ -32,6 +35,7 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/main.scss";
 .input {
+  background-color: $background-grey;
   &__decor-padding {
     width: 100%;
     height: 16px;
@@ -75,17 +79,32 @@ export default {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aea7a7', endColorstr='#72716c',GradientType=1 );
     /* IE6-9 */
   }
+  &__input-wrapper {
+    display: flex;
+    border-left: 1px solid $grey-border-color;
+  }
   &__field {
     height: 64px;
     padding: 0 16px;
     font-size: 24px;
-    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 0;
     font-style: italic;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 1px solid $grey-border-color;
     border-left: 1px solid $brown-border-color;
     outline: none;
+    background-color: $background-grey;
     &::placeholder {
       color: $grey-text-color;
     }
+  }
+  &__left-icon {
+    width: 40px;
+    border-right: 1px solid $brown-border-color;
+    margin-right: 4px;
+    height: 64px;
   }
 }
 </style>

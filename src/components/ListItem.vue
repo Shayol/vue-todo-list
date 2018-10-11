@@ -1,13 +1,21 @@
 <template>
   <div class="list__item">
     
-    <h2 class="list__name">
-        {{list.name}} 
-    </h2>
+    <div v-if="!editing" class="list__name-wrapper">
+      <h2 @click="editing=!editing" class="list__name">
+          {{list.name}} 
+      </h2>
+      <span class="list__delete" @click="deleteList">
+          &#10005;
+      </span>
+    </div>
+    <div v-else class="list__name-wrapper">
+      <input class="todo__edit-input" type="text" @keyup.enter="editList" v-model="name">
+    </div>
     <div class="list__content">
-      <Input @added="createTodo" v-bind:list="list"/>
+      <Input v-bind:list="list"/>
       <ul class="todos">
-        <TodoItem @edit-title="EditTodoTitle" v-for="todo in list.todos" v-bind:key="todo.todoId" v-bind:todo="todo"/>
+        <TodoItem v-for="todo in list.todos" v-bind:key="todo.todoId" v-bind:listId="list.listId" v-bind:todo="todo"/>
       </ul>
   
         <span class="list__number">
@@ -27,7 +35,9 @@ export default {
   name: "ListItem",
   data: function() {
     return {
-      list: {}
+      list: {},
+      editing: false,
+      name: ""
     };
   },
   components: {
@@ -36,10 +46,12 @@ export default {
   },
   created() {
     this.list = this.findList(this.$route.params.listId);
+    this.name = this.list.name;
   },
   watch: {
     $route(to, from) {
       this.list = this.findList(to.params.listId); // https://router.vuejs.org/guide/essentials/dynamic-matching.html#reacting-to-params-changes react to route changes... when navigating the same component instance will be reused - lifecycle hooks of the component will not be called
+      this.name = this.list.name;
     }
   },
   methods: {
@@ -47,11 +59,15 @@ export default {
       this.id = Number(id);
       return Store.findList(this.id);
     },
-    createTodo: function(title) {
-      Store.addTodo(this.id, title);
+    // createTodo: function(title) {
+    //   Store.addTodo(this.id, title);
+    // },
+    editList: function() {
+      Store.editList(this.list.listId, this.name);
+      this.editing = !this.editing;
     },
-    editeTodoTitle: function(id, title) {
-      Store.editeTodoTitle(this.id, id, title);
+    deleteList: function() {
+      Store.deleteTodo(this.listId);
     }
   },
   computed: {
@@ -64,10 +80,37 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+@import "@/assets/scss/main.scss";
 .list {
-  &__content {
-    max-width: 550px;
-    width: 100%;
+  &__name-wrapper {
+    margin-bottom: 30px;
+    position: relative;
   }
+  &__name {
+    font-size: 26px;
+    color: #11998e;
+    text-align: center;
+    &:hover ~ .list__delete {
+      display: block;
+    }
+  }
+  &__delete {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 30px;
+    color: red;
+    &:hover {
+      display: block;
+    }
+  }
+}
+.todos {
+  width: 550px;
+  border-bottom: 1.5px solid $grey-border-color;
+  border-left: 1px solid $grey-border-color;
+  border-right: 1px solid $grey-border-color;
+  background-color: $background-grey;
 }
 </style>

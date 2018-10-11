@@ -21,6 +21,15 @@ import Store from "@/Store.js";
 
 export default {
   name: "App",
+  created() {
+    let localData = localStorage.getItem("todoStorage");
+
+    if (localData) {
+      Store.lists = JSON.parse(localData);
+    } else {
+      localStorage.setItem("todoStorage", JSON.stringify(Store.lists));
+    }
+  },
   data: function() {
     return {
       lists: Store.lists
@@ -44,16 +53,42 @@ export default {
   display: flex;
   justify-content: center;
 }
+.page {
+  display: flex;
+  padding-top: 200px;
+}
+.page__sidebar {
+  flex-basis: 20%;
+}
+.page__main {
+  flex-grow: 1;
+}
 
-@media (min-width: $tablet) {
-  .page {
-    display: flex;
+.list {
+  &__link {
+    height: 45px;
+    border: 1px solid $grey-border-color;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: $background-grey;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 45px;
+    padding-left: 16px;
   }
-  .page__sidebar {
-    flex-basis: 20%;
-  }
-  .page__main {
-    flex-grow: 1;
-  }
+}
+
+.router-link-active {
+  background: #11998e; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #38ef7d,
+    #11998e
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #38ef7d,
+    #11998e
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 </style>
