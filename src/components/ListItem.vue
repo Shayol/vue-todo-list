@@ -7,7 +7,7 @@
     <div class="list__content">
       <Input @added="createTodo" v-bind:list="list"/>
       <ul class="todos">
-        <TodoItem v-for="todo in list.todos" v-bind:key="todo.todoId" v-bind:todo="todo"/>
+        <TodoItem @edit-title="EditTodoTitle" v-for="todo in list.todos" v-bind:key="todo.todoId" v-bind:todo="todo"/>
       </ul>
   
         <span class="list__number">
@@ -49,6 +49,9 @@ export default {
     },
     createTodo: function(title) {
       Store.addTodo(this.id, title);
+    },
+    editeTodoTitle: function(id, title) {
+      Store.editeTodoTitle(this.id, id, title);
     }
   },
   computed: {
