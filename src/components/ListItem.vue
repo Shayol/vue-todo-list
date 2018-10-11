@@ -33,10 +33,12 @@ import Store from "@/Store.js";
 
 export default {
   name: "ListItem",
+  props: ["newList"],
   data: function() {
     return {
       list: {},
       editing: false,
+      new: false,
       name: ""
     };
   },
@@ -46,12 +48,14 @@ export default {
   },
   created() {
     this.list = this.findList(this.$route.params.listId);
-    this.name = this.list.name;
+    this.populateData();
   },
   watch: {
     $route(to, from) {
       this.list = this.findList(to.params.listId); // https://router.vuejs.org/guide/essentials/dynamic-matching.html#reacting-to-params-changes react to route changes... when navigating the same component instance will be reused - lifecycle hooks of the component will not be called
-      this.name = this.list.name;
+      // this.name = this.list.name;
+      // this.editing = this.list.editing;
+      this.populateData();
     }
   },
   methods: {
@@ -59,14 +63,28 @@ export default {
       this.id = Number(id);
       return Store.findList(this.id);
     },
-    // createTodo: function(title) {
-    //   Store.addTodo(this.id, title);
-    // },
+    populateData: function() {
+      if (this.list) {
+        this.name = this.list.name;
+      } else {
+        this.list = this.newList;
+        this.name = this.list.name;
+        this.editing = this.list.editing;
+        this.new = true;
+      }
+    },
     editList: function() {
+      if (this.new) {
+        Store.makeNewList(this.list);
+        this.new = false;
+      }
       Store.editList(this.list.listId, this.name);
       this.editing = !this.editing;
     },
     deleteList: function() {
+      if (this.new) {
+        return;
+      }
       Store.deleteTodo(this.listId);
     }
   },

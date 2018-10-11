@@ -1,28 +1,27 @@
 <template>
   <div class="new-list">
-      <h2 class="list__name">
-        {{newList.name}} 
-    </h2>
-   <Input v-bind:list="newList"/>
+      <ListItem v-bind:new-list="newList" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Input from "@/components/Input.vue";
+import ListItem from "@/components/ListItem.vue";
 
 export default {
   name: "NewList",
   data: function() {
     return {
       newList: {
-        name: "Default list",
+        name: "Default todo name",
+        editing: true,
+        listId: new Date().getTime(),
         todos: []
       }
     };
   },
   components: {
-    Input
+    ListItem
   }
 };
 </script>

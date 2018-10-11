@@ -2,6 +2,7 @@
   <div id="app">
     <div class="container page">
       <ul class="page__sidebar list">
+        <button class="list__new-list" @click="makeNewList">New list</button>
         <router-link v-for="list in lists" v-bind:key="list.listId" class="list__link" :to="{ name: 'ListItem', params: { listId: list.listId}}" tag="li">
             {{list.name}}
         </router-link>
@@ -37,6 +38,11 @@ export default {
   },
   components: {
     ListItem
+  },
+  methods: {
+    makeNewList: function() {
+      this.$router.push("/");
+    }
   }
 };
 </script>

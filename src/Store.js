@@ -1,4 +1,7 @@
 export default {
+    makeNewList: function (list) {
+        this.lists.push(list);
+    },
     findList: function (id) {
         return this.lists.find(el => el.listId == id);
     },
