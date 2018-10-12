@@ -15,11 +15,14 @@
       <input class="list__edit-input" type="text" @keyup.enter="editList" v-model="name">
     </div>
     <div class="list__content">
+
       <Input v-bind:list="list"/>
+
       <ul class="todos">
         <TodoItem v-for="todo in filteredTodos" v-bind:key="todo.todoId" v-bind:listId="list.listId" v-bind:todo="todo"/>
       </ul>
-      <div class="list__bottom">       
+      
+      <div v-show="list.todos.length" class="list__bottom">       
           <span class="list__number">
             {{todosLeft}} item<span v-show="todosLeft != 1">s</span> left
           </span>
@@ -187,6 +190,20 @@ export default {
     border-bottom: 1px solid $grey-border-color;
     border-left: 1px solid $grey-border-color;
     border-right: 1px solid $grey-border-color;
+    position: relative;
+    &:after {
+      content: "";
+      height: 4px;
+      width: calc(100% + 8px);
+      position: absolute;
+      top: 0;
+      left: -4px;
+      border-bottom: 1px solid $grey-border-color;
+      border-left: 1px solid $grey-border-color;
+      border-right: 1px solid $grey-border-color;
+      background-color: rgba(255, 255, 255, 0.7);
+      // z-index: 1;
+    }
   }
   &__clearCompleted {
     padding: 4px 10px;
@@ -204,20 +221,6 @@ export default {
   border-left: 1px solid $grey-border-color;
   border-right: 1px solid $grey-border-color;
   background-color: $background-grey;
-  position: relative;
-  &:after {
-    content: "";
-    height: 4px;
-    width: calc(100% - 8px);
-    position: absolute;
-    top: calc(100% + 1px);
-    left: 4px;
-    border-bottom: 1px solid $grey-border-color;
-    border-left: 1px solid $grey-border-color;
-    border-right: 1px solid $grey-border-color;
-    background-color: rgba(255, 255, 255, 0.7);
-    // z-index: 1;
-  }
 }
 .filters {
   display: flex;
