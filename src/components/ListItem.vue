@@ -132,11 +132,15 @@ export default {
 @import "@/assets/scss/main.scss";
 .list {
   &__name-wrapper {
-    margin-bottom: 30px;
+    height: 65px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
     position: relative;
   }
   &__name {
-    font-size: 26px;
+    font-size: 28px;
+    font-weight: bold;
     color: #11998e;
     text-align: center;
     &:hover ~ .list__delete {
@@ -155,8 +159,7 @@ export default {
   &__delete {
     display: none;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 10%;
     right: 30px;
     color: red;
     cursor: pointer;
@@ -176,8 +179,14 @@ export default {
     justify-content: space-between;
     color: #969696;
     align-items: center;
-    height: 34px;
+    height: 38px;
     background-color: #efefef;
+    padding: 4px 10px 0 10px;
+    margin-left: 8px;
+    margin-right: 8px;
+    border-bottom: 1px solid $grey-border-color;
+    border-left: 1px solid $grey-border-color;
+    border-right: 1px solid $grey-border-color;
   }
   &__clearCompleted {
     padding: 4px 10px;
@@ -186,6 +195,7 @@ export default {
     border: 1px solid $grey-border-color;
     outline: none;
     font-size: 14px;
+    color: #969696;
   }
 }
 .todos {
@@ -194,6 +204,20 @@ export default {
   border-left: 1px solid $grey-border-color;
   border-right: 1px solid $grey-border-color;
   background-color: $background-grey;
+  position: relative;
+  &:after {
+    content: "";
+    height: 4px;
+    width: calc(100% - 8px);
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 4px;
+    border-bottom: 1px solid $grey-border-color;
+    border-left: 1px solid $grey-border-color;
+    border-right: 1px solid $grey-border-color;
+    background-color: rgba(255, 255, 255, 0.7);
+    // z-index: 1;
+  }
 }
 .filters {
   display: flex;

@@ -84,6 +84,7 @@ export default {
     line-height: 60px;
     padding: 0 16px;
     font-size: 24px;
+    color: #525657;
     &:hover {
       ~ .todo__delete {
         display: block;

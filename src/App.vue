@@ -63,7 +63,7 @@ export default {
 }
 .page {
   display: flex;
-  padding-top: 200px;
+  padding-top: 50px;
 }
 .page__sidebar {
   flex-basis: 20%;
@@ -83,10 +83,25 @@ export default {
     font-weight: bold;
     line-height: 45px;
     padding-left: 16px;
+    color: $grey-text-color;
+  }
+  &__new-list {
+    background: #11998e;
+    width: 100%;
+    height: 45px;
+    margin: 0 0 20px 0;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 0;
+    outline: none;
+    font-size: 18px;
+    font-weight: bold;
   }
 }
 
 .router-link-active {
+  color: white;
   background: #11998e; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
