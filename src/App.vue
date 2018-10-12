@@ -67,6 +67,7 @@ export default {
 .page {
   display: flex;
   padding-top: 50px;
+  height: 100vh;
 }
 .page__sidebar {
   flex-basis: 20%;
