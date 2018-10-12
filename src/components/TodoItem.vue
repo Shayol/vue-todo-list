@@ -5,7 +5,8 @@
       <div class="todo__field" v-if="!editing">
 
         <div class="todo__checked-wrapper">
-          <input type="checkbox" name="checked" class="todo__checked" @change="editTodoChecked" v-model="checked">
+          <input type="checkbox" name="checked" class="todo__checkbox" @change="editTodoChecked" v-model="checked">
+          <div class="todo__check">&#10004;</div>
         </div>
       
         <p class="todo__title" @click="editing=!editing" :class="{todo__completed: checked}">
@@ -75,6 +76,25 @@ export default {
     margin-right: 4px;
     border-right: 1px solid $brown-border-color;
     height: 60px;
+    position: relative;
+  }
+  &__checkbox {
+    opacity: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  &__checkbox:checked ~ &__check {
+    color: #11998e;
+  }
+  &__check {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #969696;
+    opacity: 0.6;
   }
   &__title {
     flex-grow: 1;

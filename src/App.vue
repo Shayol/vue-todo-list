@@ -64,6 +64,7 @@ export default {
 .page {
   display: flex;
   padding-top: 50px;
+  background-image: url("/assets/img/background-textures.png");
 }
 .page__sidebar {
   flex-basis: 20%;
