@@ -1,6 +1,8 @@
 <template>
   <div class="list__item">
-    
+    <p v-show="!list.listId" class="list__alert">
+      Please give your list a name before adding todos
+    </p>
     <div v-if="!editing" class="list__name-wrapper">
       <h2 @click="editing=!editing" class="list__name">
           {{list.name}} 
@@ -15,12 +17,18 @@
     <div class="list__content">
       <Input v-bind:list="list"/>
       <ul class="todos">
-        <TodoItem v-for="todo in list.todos" v-bind:key="todo.todoId" v-bind:listId="list.listId" v-bind:todo="todo"/>
+        <TodoItem v-for="todo in filteredTodos" v-bind:key="todo.todoId" v-bind:listId="list.listId" v-bind:todo="todo"/>
       </ul>
-  
-        <span class="list__number">
-          {{todosNumber}}
-        </span>
+      <div class="list__bottom">       
+          <span class="list__number">
+            {{todosNumber}} item<span v-show="todosNumber != 1">s</span> left
+          </span>
+          <div class="list__filters filters">
+            <a href="" @click.prevent="filter='All'" :class="{filters__active: filter=='All'}" class="filters__link">All</a>
+            <a href="" @click.prevent="filter='Active'" :class="{filters__active: filter=='Active'}" class="filters__link">Active</a>
+            <a href="" @click.prevent="filter='Completed'" :class="{filters__active: filter=='Completed'}" class="filters__link">Completed</a>
+          </div>
+      </div>
     </div>
     
   </div>
@@ -39,7 +47,8 @@ export default {
       list: {},
       editing: false,
       new: false,
-      name: ""
+      name: "",
+      filter: "All"
     };
   },
   components: {
@@ -58,8 +67,8 @@ export default {
   },
   methods: {
     findList: function(id) {
-      this.id = Number(id);
-      return Store.findList(this.id);
+      let parsedId = Number(id);
+      return Store.findList(parsedId);
     },
     populateData: function() {
       if (this.list) {
@@ -72,26 +81,39 @@ export default {
     },
     editList: function() {
       if (!this.list.listId) {
-        Store.makeNewList({
+        let createdList = {
           name: this.name,
           listId: new Date().getTime(),
           editing: false,
           todos: this.list.todos
-        });
+        };
+
+        Store.makeNewList(createdList);
+        this.list = Store.findList(createdList.listId);
       }
       Store.editList(this.list.listId, this.name);
       this.editing = !this.editing;
     },
     deleteList: function() {
-      if (this.new) {
+      if (!this.list.listId) {
         return;
       }
-      Store.deleteTodo(this.listId);
+      Store.deleteList(this.list.listId);
+      this.$router.push("/");
     }
   },
   computed: {
+    filteredTodos: function() {
+      if (this.filter == "All") {
+        return this.list.todos;
+      } else if (this.filter == "Active") {
+        return this.list.todos.filter(el => !el.checked);
+      } else if (this.filter == "Completed") {
+        return this.list.todos.filter(el => el.checked);
+      }
+    },
     todosNumber: function() {
-      return this.list.todos.length;
+      return this.list.todos.filter(el => !el.checked).length;
     }
   }
 };
@@ -120,9 +142,21 @@ export default {
     transform: translateY(-50%);
     right: 30px;
     color: red;
+    cursor: pointer;
     &:hover {
       display: block;
     }
+  }
+  &__alert {
+    padding: 15px;
+    background-color: #ee8c4a;
+    color: white;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
   }
 }
 .todos {
@@ -131,5 +165,14 @@ export default {
   border-left: 1px solid $grey-border-color;
   border-right: 1px solid $grey-border-color;
   background-color: $background-grey;
+}
+.filters {
+  display: flex;
+  height: 32px;
+  &__link {
+    text-decoration: none;
+    color: #969696;
+    margin-left: 10px;
+  }
 }
 </style>

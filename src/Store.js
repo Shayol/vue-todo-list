@@ -10,16 +10,16 @@ export default {
         let list = this.findList(listId);
         if (list) {
             list.name = name;
+            localStorage.setItem("todoStorage", JSON.stringify(this.lists));
         }
-        localStorage.setItem("todoStorage", JSON.stringify(this.lists));
     },
     deleteList: function (listId) {
         let list = this.findList(listId);
         let index = this.lists.indexOf(list);
         if (index > -1) {
             this.lists.splice(index, 1);
+            localStorage.setItem("todoStorage", JSON.stringify(this.lists));
         }
-        localStorage.setItem("todoStorage", JSON.stringify(this.lists));
     },
     findTodo: function (listId, todoId) {
         return this.findList(listId)

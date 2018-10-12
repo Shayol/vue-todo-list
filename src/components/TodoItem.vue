@@ -5,7 +5,7 @@
       <div class="todo__field" v-if="!editing">
 
         <div class="todo__checked-wrapper">
-          <input type="checkbox" name="checked" class="todo__checked" @input="editTodoChecked" v-model="checked">
+          <input type="checkbox" name="checked" class="todo__checked" @change="editTodoChecked" v-model="checked">
         </div>
       
         <p class="todo__title" @click="editing=!editing" :class="{todo__completed: checked}">
@@ -30,11 +30,19 @@ export default {
   props: ["todo", "listId"],
   data: function() {
     return {
-      title: this.todo.title,
-      checked: this.todo.checked,
-      editing: this.todo.editing,
-      todoId: this.todo.todoId
+      localTodo: {},
+      title: "",
+      checked: false,
+      editing: false,
+      todoId: ""
     };
+  },
+  created() {
+    this.localTodo = Store.findTodo(this.listId, this.todo.todoId);
+    this.title = this.todo.title;
+    this.checked = this.todo.checked;
+    this.editing = this.todo.editing;
+    this.todoId = this.todo.todoId;
   },
   methods: {
     deleteTodo: function() {
@@ -45,7 +53,7 @@ export default {
       this.editing = !this.editing;
     },
     editTodoChecked: function() {
-      Store.editTodoTitle(this.listId, this.todoId, this.checked);
+      Store.editTodoChecked(this.listId, this.todoId, this.checked);
     }
   }
 };

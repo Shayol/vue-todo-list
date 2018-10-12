@@ -23,8 +23,10 @@ export default {
     create: function() {
       let entry = this.title.trim();
       if (entry) {
-        Store.addTodo(this.list.listId, this.title);
-        this.title = "";
+        if (this.list.listId) {
+          Store.addTodo(this.list.listId, this.title);
+          this.title = "";
+        }
       }
     }
   }
