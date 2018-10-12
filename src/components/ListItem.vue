@@ -12,7 +12,7 @@
       </span>
     </div>
     <div v-else class="list__name-wrapper">
-      <input class="todo__edit-input" type="text" @keyup.enter="editList" v-model="name">
+      <input class="list__edit-input" type="text" @keyup.enter="editList" v-model="name">
     </div>
     <div class="list__content">
       <Input v-bind:list="list"/>
@@ -21,13 +21,16 @@
       </ul>
       <div class="list__bottom">       
           <span class="list__number">
-            {{todosNumber}} item<span v-show="todosNumber != 1">s</span> left
+            {{todosLeft}} item<span v-show="todosLeft != 1">s</span> left
           </span>
           <div class="list__filters filters">
             <a href="" @click.prevent="filter='All'" :class="{filters__active: filter=='All'}" class="filters__link">All</a>
             <a href="" @click.prevent="filter='Active'" :class="{filters__active: filter=='Active'}" class="filters__link">Active</a>
             <a href="" @click.prevent="filter='Completed'" :class="{filters__active: filter=='Completed'}" class="filters__link">Completed</a>
           </div>
+          <button class="list__clearCompleted" @click.prevent="clearCompleted">
+            Clear completed (<span>{{todosCompleted}}</span>)
+          </button>
       </div>
     </div>
     
@@ -71,13 +74,11 @@ export default {
       return Store.findList(parsedId);
     },
     populateData: function() {
-      if (this.list) {
-        this.name = this.list.name;
-      } else {
+      if (!this.list) {
         this.list = this.newList;
-        this.name = this.list.name;
         this.editing = this.list.editing;
       }
+      this.name = this.list.name;
     },
     editList: function() {
       if (!this.list.listId) {
@@ -91,8 +92,8 @@ export default {
         Store.makeNewList(createdList);
         this.list = Store.findList(createdList.listId);
       }
-      Store.editList(this.list.listId, this.name);
       this.editing = !this.editing;
+      Store.editList(this.list.listId, this.name);
     },
     deleteList: function() {
       if (!this.list.listId) {
@@ -100,6 +101,10 @@ export default {
       }
       Store.deleteList(this.list.listId);
       this.$router.push("/");
+    },
+    clearCompleted() {
+      let completed = this.list.todos.filter(el => el.checked);
+      completed.forEach(el => Store.deleteTodo(this.list.listId, el.todoId));
     }
   },
   computed: {
@@ -112,8 +117,11 @@ export default {
         return this.list.todos.filter(el => el.checked);
       }
     },
-    todosNumber: function() {
+    todosLeft: function() {
       return this.list.todos.filter(el => !el.checked).length;
+    },
+    todosCompleted: function() {
+      return this.list.todos.filter(el => el.checked).length;
     }
   }
 };
@@ -134,6 +142,15 @@ export default {
     &:hover ~ .list__delete {
       display: block;
     }
+  }
+  &__edit-input {
+    height: 60px;
+    font-size: 24px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 16px;
   }
   &__delete {
     display: none;
@@ -157,6 +174,18 @@ export default {
   &__bottom {
     display: flex;
     justify-content: space-between;
+    color: #969696;
+    align-items: center;
+    height: 34px;
+    background-color: #efefef;
+  }
+  &__clearCompleted {
+    padding: 4px 10px;
+    background-color: #d1d1d1;
+    border-radius: 4px;
+    border: 1px solid $grey-border-color;
+    outline: none;
+    font-size: 14px;
   }
 }
 .todos {
@@ -169,10 +198,14 @@ export default {
 .filters {
   display: flex;
   height: 32px;
+  align-items: center;
   &__link {
     text-decoration: none;
-    color: #969696;
     margin-left: 10px;
+    color: #969696;
+  }
+  &__active {
+    font-weight: bold;
   }
 }
 </style>
