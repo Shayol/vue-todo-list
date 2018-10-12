@@ -114,7 +114,7 @@ export default {
   &__edit-input {
     height: 60px;
     font-size: 24px;
-    margin-left: 44px;
+    padding-left: 16px;
     flex-grow: 1;
     flex-shrink: 0;
     margin-top: 0;

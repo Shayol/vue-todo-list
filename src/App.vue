@@ -52,19 +52,21 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/main.scss";
 .container {
-  max-width: 960px;
+  max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
+  padding: 60px 60px;
+  background-image: url("./assets/img/background-textures.png");
 }
 
 .main {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 }
 .page {
   display: flex;
   padding-top: 50px;
-  background-image: url("/assets/img/background-textures.png");
 }
 .page__sidebar {
   flex-basis: 20%;
@@ -98,6 +100,7 @@ export default {
     outline: none;
     font-size: 18px;
     font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 }
 

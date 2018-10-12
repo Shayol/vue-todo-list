@@ -21,10 +21,10 @@
       <ul class="todos">
         <TodoItem v-for="todo in filteredTodos" v-bind:key="todo.todoId" v-bind:listId="list.listId" v-bind:todo="todo"/>
       </ul>
-      
+
       <div v-show="list.todos.length" class="list__bottom">       
           <span class="list__number">
-            {{todosLeft}} item<span v-show="todosLeft != 1">s</span> left
+            <strong class="list__bold">{{todosLeft}}</strong>  item<span v-show="todosLeft != 1">s</span> left
           </span>
           <div class="list__filters filters">
             <a href="" @click.prevent="filter='All'" :class="{filters__active: filter=='All'}" class="filters__link">All</a>
@@ -182,7 +182,7 @@ export default {
     justify-content: space-between;
     color: #969696;
     align-items: center;
-    height: 38px;
+    height: 36px;
     background-color: #efefef;
     padding: 4px 10px 0 10px;
     margin-left: 8px;
@@ -191,6 +191,8 @@ export default {
     border-left: 1px solid $grey-border-color;
     border-right: 1px solid $grey-border-color;
     position: relative;
+    box-shadow: 5px 5px 10px $grey-border-color,
+      -5px 5px 10px $grey-border-color;
     &:after {
       content: "";
       height: 4px;
@@ -205,31 +207,46 @@ export default {
       // z-index: 1;
     }
   }
+  &__number {
+    font-size: 12px;
+  }
+  &__bold {
+    font-weight: bold;
+  }
   &__clearCompleted {
     padding: 4px 10px;
     background-color: #d1d1d1;
     border-radius: 4px;
     border: 1px solid $grey-border-color;
     outline: none;
-    font-size: 14px;
+    font-size: 10px;
     color: #969696;
+    box-shadow: inset 0px 0px 5px $grey-border-color;
+    outline: none;
   }
 }
 .todos {
   width: 550px;
-  border-bottom: 1.5px solid $grey-border-color;
+  border-bottom: 1px solid $grey-border-color;
   border-left: 1px solid $grey-border-color;
   border-right: 1px solid $grey-border-color;
   background-color: $background-grey;
+  box-shadow: 5px 5px 15px $grey-border-color, -5px 5px 10px $grey-border-color;
 }
 .filters {
   display: flex;
   height: 32px;
   align-items: center;
+  margin-right: -10%;
   &__link {
     text-decoration: none;
     margin-left: 10px;
     color: #969696;
+    font-size: 12px;
+    font-weight: 500;
+    &:first-child {
+      margin-left: 0;
+    }
   }
   &__active {
     font-weight: bold;

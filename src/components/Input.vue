@@ -39,6 +39,7 @@ export default {
 .input {
   background-color: $background-grey;
   &__decor-padding {
+    border-bottom: 1px solid #665f5c;
     width: 100%;
     height: 16px;
     background: #aea7a7; /* Old browsers */
@@ -84,6 +85,8 @@ export default {
   &__input-wrapper {
     display: flex;
     border-left: 1px solid $grey-border-color;
+    box-shadow: 5px 5px 10px $grey-border-color,
+      -5px 5px 10px $grey-border-color;
   }
   &__field {
     height: 64px;
@@ -107,6 +110,25 @@ export default {
     border-right: 1px solid $brown-border-color;
     margin-right: 4px;
     height: 64px;
+    position: relative;
+    &::before,
+    &:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 10px;
+      height: 10px;
+      border-right: 1.2px solid #969696;
+      border-bottom: 1.2px solid #969696;
+      opacity: 0.6;
+    }
+    &:before {
+      top: 20px;
+    }
+    &:after {
+      top: 30px;
+    }
   }
 }
 </style>
