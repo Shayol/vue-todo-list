@@ -53,8 +53,6 @@ export default {
   watch: {
     $route(to, from) {
       this.list = this.findList(to.params.listId); // https://router.vuejs.org/guide/essentials/dynamic-matching.html#reacting-to-params-changes react to route changes... when navigating the same component instance will be reused - lifecycle hooks of the component will not be called
-      // this.name = this.list.name;
-      // this.editing = this.list.editing;
       this.populateData();
     }
   },
@@ -70,13 +68,16 @@ export default {
         this.list = this.newList;
         this.name = this.list.name;
         this.editing = this.list.editing;
-        this.new = true;
       }
     },
     editList: function() {
-      if (this.new) {
-        Store.makeNewList(this.list);
-        this.new = false;
+      if (!this.list.listId) {
+        Store.makeNewList({
+          name: this.name,
+          listId: new Date().getTime(),
+          editing: false,
+          todos: this.list.todos
+        });
       }
       Store.editList(this.list.listId, this.name);
       this.editing = !this.editing;

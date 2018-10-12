@@ -15,7 +15,7 @@ export default {
       newList: {
         name: "Default todo name",
         editing: true,
-        listId: new Date().getTime(),
+        listId: "",
         todos: []
       }
     };

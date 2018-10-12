@@ -27,13 +27,15 @@ export default {
 
     if (localData) {
       Store.lists = JSON.parse(localData);
+      console.log(Store);
     } else {
       localStorage.setItem("todoStorage", JSON.stringify(Store.lists));
     }
+    this.lists = Store.lists;
   },
   data: function() {
     return {
-      lists: Store.lists
+      lists: []
     };
   },
   components: {

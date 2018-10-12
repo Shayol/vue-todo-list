@@ -1,6 +1,7 @@
 export default {
     makeNewList: function (list) {
         this.lists.push(list);
+        localStorage.setItem("todoStorage", JSON.stringify(this.lists));
     },
     findList: function (id) {
         return this.lists.find(el => el.listId == id);
