@@ -67,15 +67,14 @@ export default {
   &__field {
     display: flex;
     position: relative;
-    height: 60px;
+    height: 48px;
     align-items: center;
     border-top: 1px dotted $brown-border-color;
   }
   &__checked-wrapper {
     width: 40px;
     margin-right: 4px;
-    border-right: 1px solid $brown-border-color;
-    height: 60px;
+    height: 48px;
     position: relative;
   }
   &__checkbox {
@@ -99,12 +98,11 @@ export default {
   &__title {
     flex-grow: 1;
     flex-shrink: 0;
-    border-left: 1px solid $brown-border-color;
-    height: 60px;
-    line-height: 60px;
+    height: 48px;
+    line-height: 48px;
     padding: 0 16px;
-    font-size: 24px;
-    color: #525657;
+    font-size: 16px;
+    color: $dark-brown;
     &:hover {
       ~ .todo__delete {
         display: block;

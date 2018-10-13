@@ -37,7 +37,6 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/main.scss";
 .input {
-  background-color: $background-grey;
   &__decor-padding {
     border-bottom: 1px solid #665f5c;
     width: 100%;
@@ -84,33 +83,28 @@ export default {
   }
   &__input-wrapper {
     display: flex;
-    border-left: 1px solid $grey-border-color;
     box-shadow: 5px 5px 10px $grey-border-color,
       -5px 5px 10px $grey-border-color;
   }
   &__field {
-    height: 64px;
+    height: 48px;
     padding: 0 16px;
-    font-size: 24px;
+    font-size: 20px;
     flex-grow: 1;
     flex-shrink: 0;
     font-style: italic;
-    border-top: 0;
+    border: 0;
     border-bottom: 0;
-    border-right: 1px solid $grey-border-color;
-    border-left: 1px solid $brown-border-color;
     outline: none;
-    background-color: $background-grey;
     &::placeholder {
       color: $grey-text-color;
     }
   }
   &__left-icon {
-    width: 40px;
-    border-right: 1px solid $brown-border-color;
-    margin-right: 4px;
-    height: 64px;
+    width: 44px;
+    height: 48px;
     position: relative;
+    background-color: white;
     &::before,
     &:after {
       content: "";
@@ -124,10 +118,10 @@ export default {
       opacity: 0.6;
     }
     &:before {
-      top: 20px;
+      top: 14px;
     }
     &:after {
-      top: 30px;
+      top: 20px;
     }
   }
 }

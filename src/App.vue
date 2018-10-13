@@ -78,45 +78,31 @@ export default {
 
 .list {
   &__link {
-    height: 45px;
-    border: 1px solid $grey-border-color;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background: $background-grey;
-    font-size: 18px;
+    height: 16px;
+    font-size: 16px;
     font-weight: bold;
-    line-height: 45px;
+    line-height: 1;
     padding-left: 16px;
-    color: $grey-text-color;
+    margin-bottom: 16px;
+    color: $brown-border-color;
   }
   &__new-list {
-    background: #11998e;
     width: 100%;
-    height: 45px;
-    margin: 0 0 20px 0;
+    height: 32px;
+    margin: 0 0 16px 0;
     border: none;
     border-radius: 5px;
-    color: white;
+    color: $dark-brown;
     padding: 0;
-    outline: none;
-    font-size: 18px;
+    outline: 1px solid $grey-border-color;
+    font-size: 16px;
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: none;
   }
 }
 
 .router-link-active {
-  color: white;
-  background: #11998e; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #38ef7d,
-    #11998e
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #38ef7d,
-    #11998e
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: $dark-brown;
 }
 </style>

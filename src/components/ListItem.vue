@@ -135,29 +135,32 @@ export default {
 @import "@/assets/scss/main.scss";
 .list {
   &__name-wrapper {
-    height: 65px;
+    height: 48px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     position: relative;
   }
   &__name {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
-    color: #11998e;
+    color: $dark-brown;
     text-align: center;
+    text-shadow: 2px 2px 8px $grey-border-color;
     &:hover ~ .list__delete {
       display: block;
     }
   }
   &__edit-input {
-    height: 60px;
+    height: 32px;
     font-size: 24px;
     flex-grow: 1;
     flex-shrink: 0;
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 16px;
+    color: $dark-brown;
+    border: none;
   }
   &__delete {
     display: none;
@@ -171,42 +174,28 @@ export default {
     }
   }
   &__alert {
-    padding: 15px;
-    background-color: #ee8c4a;
+    padding: 8px 16px;
+    background-color: #ee8c4aca;
     color: white;
-    margin-bottom: 15px;
-    font-size: 16px;
+    margin-bottom: 16px;
+    font-size: 12px;
   }
   &__bottom {
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid $grey-border-color;
     color: #969696;
     align-items: center;
-    height: 36px;
+    height: 33px;
     background-color: #efefef;
     padding: 4px 10px 0 10px;
     margin-left: 8px;
     margin-right: 8px;
-    border-bottom: 1px solid $grey-border-color;
-    border-left: 1px solid $grey-border-color;
-    border-right: 1px solid $grey-border-color;
     position: relative;
     box-shadow: 5px 5px 10px $grey-border-color,
       -5px 5px 10px $grey-border-color;
-    &:after {
-      content: "";
-      height: 4px;
-      width: calc(100% + 8px);
-      position: absolute;
-      top: 0;
-      left: -4px;
-      border-bottom: 1px solid $grey-border-color;
-      border-left: 1px solid $grey-border-color;
-      border-right: 1px solid $grey-border-color;
-      background-color: rgba(255, 255, 255, 0.7);
-      // z-index: 1;
-    }
   }
+
   &__number {
     font-size: 12px;
   }
@@ -227,10 +216,7 @@ export default {
 }
 .todos {
   width: 550px;
-  border-bottom: 1px solid $grey-border-color;
-  border-left: 1px solid $grey-border-color;
-  border-right: 1px solid $grey-border-color;
-  background-color: $background-grey;
+  background-color: white;
   box-shadow: 5px 5px 15px $grey-border-color, -5px 5px 10px $grey-border-color;
 }
 .filters {
