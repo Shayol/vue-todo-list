@@ -6,7 +6,12 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
+    background-image: url('~@/assets/img/background-textures.png');
     font-family: Verdana;
-    height: 100vh;
+    min-height: 100%; // display: flex;
 }

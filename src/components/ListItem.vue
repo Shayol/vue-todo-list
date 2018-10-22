@@ -134,6 +134,9 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/main.scss";
 .list {
+  &__item {
+    width: 100%;
+  }
   &__name-wrapper {
     height: 48px;
     display: flex;
@@ -183,10 +186,11 @@ export default {
   &__bottom {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     border-top: 1px solid $grey-border-color;
     color: #969696;
     align-items: center;
-    height: 33px;
+    // height: 33px;
     background-color: #efefef;
     padding: 4px 10px 0 10px;
     margin-left: 8px;
@@ -198,6 +202,11 @@ export default {
 
   &__number {
     font-size: 12px;
+    flex-basis: 50%;
+    order: 1;
+  }
+  &__filters {
+    flex-basis: 50%;
   }
   &__bold {
     font-weight: bold;
@@ -215,15 +224,14 @@ export default {
   }
 }
 .todos {
-  width: 550px;
   background-color: white;
   box-shadow: 5px 5px 15px $grey-border-color, -5px 5px 10px $grey-border-color;
+  width: 100%;
 }
 .filters {
   display: flex;
   height: 32px;
   align-items: center;
-  margin-right: -10%;
   &__link {
     text-decoration: none;
     margin-left: 10px;
@@ -236,6 +244,20 @@ export default {
   }
   &__active {
     font-weight: bold;
+  }
+}
+
+@media (min-width: $tablet) {
+  .list {
+    &__number {
+      font-size: 12px;
+      flex-basis: auto;
+      order: 0;
+    }
+    &__filters {
+      flex-basis: auto;
+      margin-right: -10%;
+    }
   }
 }
 </style>

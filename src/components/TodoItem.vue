@@ -70,6 +70,7 @@ export default {
     height: 48px;
     align-items: center;
     border-top: 1px dotted $brown-border-color;
+    width: 100%;
   }
   &__checked-wrapper {
     width: 40px;

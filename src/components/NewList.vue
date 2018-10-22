@@ -25,3 +25,8 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+.new-list {
+  width: 100%;
+}
+</style>

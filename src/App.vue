@@ -1,19 +1,17 @@
 <template>
-  <div id="app">
-    <div class="container page">
-      <ul class="page__sidebar list">
-        <button class="list__new-list" @click="makeNewList">New list</button>
-        <router-link v-for="list in lists" v-bind:key="list.listId" class="list__link" :to="{ name: 'ListItem', params: { listId: list.listId}}" tag="li">
-            {{list.name}}
-        </router-link>
-        
-      </ul>
-      <div class="page__main main">
-        <router-view></router-view>
-      </div>
+  <div id="app" class="container page">
+    <ul class="page__sidebar list">
+      <button class="list__new-list" @click="makeNewList">New list</button>
+      <router-link v-for="list in lists" v-bind:key="list.listId" class="list__link" :to="{ name: 'ListItem', params: { listId: list.listId}}" tag="li">
+          {{list.name}}
+      </router-link>
+      
+    </ul>
+    <div class="page__main main">
+      <router-view></router-view>
     </div>
-    
   </div>
+    
 </template>
 
 <script>
@@ -53,9 +51,9 @@ export default {
 @import "@/assets/scss/main.scss";
 .container {
   max-width: 1080px;
+  min-width: 320px;
   margin-left: auto;
   margin-right: auto;
-  padding: 60px 60px;
   background-image: url("./assets/img/background-textures.png");
 }
 
@@ -66,17 +64,22 @@ export default {
 }
 .page {
   display: flex;
-  padding-top: 50px;
-  height: 100vh;
+  height: 100%;
+  flex-direction: column;
+  padding: 8px;
+
+  &__sidebar {
+    display: block;
+  }
 }
-.page__sidebar {
-  flex-basis: 20%;
-}
+
 .page__main {
   flex-grow: 1;
 }
 
 .list {
+  display: flex;
+  flex-wrap: wrap;
   &__link {
     height: 16px;
     font-size: 16px;
@@ -104,5 +107,21 @@ export default {
 
 .router-link-active {
   color: $dark-brown;
+}
+
+@media (min-width: $tablet) {
+  .list {
+    display: block;
+  }
+  .page {
+    padding: 48px 2em 32px 2em;
+    flex-direction: row;
+    &__sidebar {
+      flex-basis: 20%;
+    }
+    &__main {
+      margin-left: 5%;
+    }
+  }
 }
 </style>
