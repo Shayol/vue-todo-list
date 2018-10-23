@@ -125,6 +125,7 @@ export default {
     transform: translateY(-50%);
     right: 30px;
     color: red;
+    cursor: pointer;
   }
   &__completed {
     color: $grey-text-color;

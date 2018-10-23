@@ -103,6 +103,7 @@ export default {
     padding-left: 16px;
     margin-bottom: 16px;
     color: $brown-border-color;
+    cursor: pointer;
   }
   &__new-list {
     width: 100%;
