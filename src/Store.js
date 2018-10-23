@@ -6,6 +6,9 @@ export default {
     findList: function (id) {
         return this.lists.find(el => el.listId == id);
     },
+    findListByName: function (name) {
+        return this.lists.find(el => el.name == name);
+    },
     editList: function (listId, name) {
         let list = this.findList(listId);
         if (list) {

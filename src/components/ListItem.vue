@@ -1,7 +1,7 @@
 <template>
   <div class="list__item">
-    <p v-show="!list.listId" class="list__alert">
-      Please give your list a name before adding todos
+    <p v-show="error" class="list__alert">
+      {{error}}
     </p>
     <div v-if="!editing" class="list__name-wrapper">
       <h2 @click="editing=!editing" class="list__name">
@@ -54,7 +54,8 @@ export default {
       editing: false,
       new: false,
       name: "",
-      filter: "All"
+      filter: "All",
+      sameNameError: ""
     };
   },
   components: {
@@ -85,15 +86,29 @@ export default {
     },
     editList: function() {
       if (!this.list.listId) {
-        let createdList = {
-          name: this.name,
-          listId: new Date().getTime(),
-          editing: false,
-          todos: this.list.todos
-        };
+        if (Store.findListByName(this.name)) {
+          this.sameNameError = `There is already a list with '${
+            this.name
+          }' name. Please, give your list unique name.`;
+          return;
+        } else {
+          this.sameNameError = false;
 
-        Store.makeNewList(createdList);
-        this.list = Store.findList(createdList.listId);
+          let createdList = {
+            name: this.name,
+            listId: new Date().getTime(),
+            editing: false,
+            todos: this.list.todos
+          };
+
+          Store.makeNewList(createdList);
+          this.list = Store.findList(createdList.listId);
+
+          this.$router.push({
+            name: "ListItem",
+            params: { listId: this.list.listId }
+          });
+        }
       }
       this.editing = !this.editing;
       Store.editList(this.list.listId, this.name);
@@ -125,6 +140,15 @@ export default {
     },
     todosCompleted: function() {
       return this.list.todos.filter(el => el.checked).length;
+    },
+    error: function() {
+      if (this.sameNameError) {
+        return this.sameNameError;
+      } else if (!this.list.listId) {
+        return "Please give your list a name before adding todos";
+      } else {
+        return false;
+      }
     }
   }
 };
