@@ -67,7 +67,7 @@ export default {
   &__field {
     display: flex;
     position: relative;
-    height: 48px;
+    min-height: 48px;
     align-items: center;
     border-top: 1px dotted $brown-border-color;
     width: 100%;
@@ -75,8 +75,9 @@ export default {
   &__checked-wrapper {
     width: 40px;
     margin-right: 4px;
-    height: 48px;
+    min-height: 48px;
     position: relative;
+    flex-shrink: 0;
   }
   &__checkbox {
     opacity: 0;
@@ -98,8 +99,7 @@ export default {
   }
   &__title {
     flex-grow: 1;
-    flex-shrink: 0;
-    height: 48px;
+    min-height: 48px;
     line-height: 48px;
     padding: 0 16px;
     font-size: 16px;
@@ -120,20 +120,25 @@ export default {
     margin-bottom: 0;
   }
   &__delete {
-    display: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     right: 30px;
     color: red;
-    &:hover {
-      display: block;
-    }
   }
   &__completed {
     color: $grey-text-color;
     text-decoration: line-through;
     text-decoration-color: $grey-text-color;
+  }
+
+  @media (min-width: $tablet) {
+    &__delete {
+      display: none;
+      &:hover {
+        display: block;
+      }
+    }
   }
 }
 </style>

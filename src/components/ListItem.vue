@@ -160,6 +160,7 @@ export default {
 .list {
   &__item {
     width: 100%;
+    margin-top: 16px;
   }
   &__name-wrapper {
     height: 48px;
@@ -190,15 +191,11 @@ export default {
     border: none;
   }
   &__delete {
-    display: none;
     position: absolute;
     top: 10%;
     right: 30px;
     color: red;
     cursor: pointer;
-    &:hover {
-      display: block;
-    }
   }
   &__alert {
     padding: 8px 16px;
@@ -216,7 +213,7 @@ export default {
     align-items: center;
     // height: 33px;
     background-color: #efefef;
-    padding: 4px 10px 0 10px;
+    padding: 4px 10px 4px 10px;
     margin-left: 8px;
     margin-right: 8px;
     position: relative;
@@ -273,6 +270,9 @@ export default {
 
 @media (min-width: $tablet) {
   .list {
+    &__item {
+      margin-top: 0;
+    }
     &__number {
       font-size: 12px;
       flex-basis: auto;
@@ -281,6 +281,12 @@ export default {
     &__filters {
       flex-basis: auto;
       margin-right: -10%;
+    }
+    &__delete {
+      display: none;
+      &:hover {
+        display: block;
+      }
     }
   }
 }

@@ -7,11 +7,19 @@
 }
 
 html {
+    min-height: 100%;
     height: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     background-image: url('~@/assets/img/background-textures.png');
     font-family: Verdana;
-    min-height: 100%; // display: flex;
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
