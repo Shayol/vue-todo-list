@@ -79,14 +79,12 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   &__content {
-    display: flex;
     height: 100%;
-    flex-direction: column;
     padding: 8px;
+  }
 
-    &__sidebar {
-      display: block;
-    }
+  &__sidebar {
+    display: block;
   }
 }
 
@@ -162,11 +160,11 @@ export default {
   }
   .page {
     &__content {
-      flex-direction: row;
+      display: flex;
       padding: 48px 2em 32px 2em;
     }
     &__sidebar {
-      flex-basis: 20%;
+      flex-basis: 30%;
     }
     &__main {
       margin-left: 5%;
