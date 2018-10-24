@@ -76,15 +76,19 @@ export default {
     width: 40px;
     margin-right: 4px;
     min-height: 48px;
+    height: 100%;
     position: relative;
     flex-shrink: 0;
   }
   &__checkbox {
     opacity: 0;
     z-index: 2;
-    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
-    position: relative;
+    height: 100%;
+    margin: 0;
   }
   &__checkbox:checked ~ &__check {
     color: #11998e;
