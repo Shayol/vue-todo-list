@@ -62,6 +62,7 @@ export default {
 .container {
   max-width: 1080px;
   min-width: 320px;
+  min-height: 100vh;
   margin-left: auto;
   margin-right: auto;
   background-image: url("./assets/img/background-textures.png");
@@ -73,8 +74,6 @@ export default {
   align-items: flex-start;
 }
 .page {
-  min-height: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
