@@ -101,7 +101,7 @@ export default {
       color: $grey-text-color;
     }
     &:focus ~ .input__left-icon {
-      outline: 1px solid #b8b8b8;
+      border: 1px solid #b8b8b8;
       &:before,
       &:after {
         border-right-color: #11998e;
