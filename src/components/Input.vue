@@ -2,8 +2,8 @@
   <div class="input">
     <div class="input__decor-padding"></div>
     <div class="input__input-wrapper">
-        <div class="input__left-icon"></div>
        <input class="input__field" @keyup.enter="create" v-model="title" type="text" placeholder="What needs to be done?">
+       <div @click="create" class="input__left-icon"></div>
     </div>
     
   </div>
@@ -87,6 +87,7 @@ export default {
       -5px 5px 10px $grey-border-color;
   }
   &__field {
+    order: 1;
     height: 48px;
     padding: 0 16px;
     font-size: 20px;
@@ -98,6 +99,14 @@ export default {
     outline: none;
     &::placeholder {
       color: $grey-text-color;
+    }
+    &:focus ~ .input__left-icon {
+      outline: 1px solid #b8b8b8;
+      &:before,
+      &:after {
+        border-right-color: #11998e;
+        border-bottom-color: #11998e;
+      }
     }
   }
   &__left-icon {

@@ -16,7 +16,7 @@
           &#10005;
         </span>
       </div>
-      <div class="todo__field" v-else>
+      <div class="todo__field todo__field--editing" v-else>
         <div class="todo__checked-wrapper"></div>
         <input class="todo__edit-input" type="text" @keyup.enter="editTodoTitle" v-model="title">
       </div>
@@ -71,6 +71,9 @@ export default {
     align-items: center;
     border-top: 1px dotted $brown-border-color;
     width: 100%;
+    &\--editing {
+      background-color: #efefef;
+    }
   }
   &__checked-wrapper {
     width: 40px;
@@ -115,13 +118,14 @@ export default {
     }
   }
   &__edit-input {
-    height: 60px;
+    min-height: 32px;
     font-size: 24px;
     padding-left: 16px;
     flex-grow: 1;
     flex-shrink: 0;
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 16px;
   }
   &__delete {
     position: absolute;

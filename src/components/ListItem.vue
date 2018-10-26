@@ -12,7 +12,7 @@
       </span>
     </div>
     <div v-else class="list__name-wrapper">
-      <input class="list__edit-input" type="text" @keyup.enter="editList" v-model="name">
+      <input ref="listedit" class="list__edit-input" type="text" @keyup.enter="editList" v-model="name" placeholder="list name...">
     </div>
     <div class="list__content">
 
@@ -66,6 +66,11 @@ export default {
     this.list = this.findList(this.$route.params.listId);
     this.populateData();
   },
+  mounted() {
+    if (!this.list.listId) {
+      this.$refs.listedit.focus();
+    }
+  },
   watch: {
     $route(to, from) {
       this.list = this.findList(to.params.listId); // https://router.vuejs.org/guide/essentials/dynamic-matching.html#reacting-to-params-changes react to route changes... when navigating the same component instance will be reused - lifecycle hooks of the component will not be called
@@ -81,6 +86,7 @@ export default {
       if (!this.list) {
         this.list = this.newList;
         this.editing = this.list.editing;
+        return;
       }
       this.name = this.list.name;
     },
@@ -189,6 +195,14 @@ export default {
     padding-left: 16px;
     color: $dark-brown;
     border: none;
+    &:focus {
+      outline: none;
+      border: 1px solid $dark-brown;
+    }
+    &::placeholder {
+      color: $grey-text-color;
+      font-style: italic;
+    }
   }
   &__delete {
     position: absolute;
