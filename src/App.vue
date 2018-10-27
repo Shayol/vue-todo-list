@@ -2,7 +2,9 @@
   <div id="app" class="container page">
     <div class="page__content">
       <ul class="page__sidebar list">
-        <button class="list__new-list" @click="makeNewList">New list</button>
+        <button class="list__new-list" @click="makeNewList">New list
+          <img src="./assets/img/plus.svg" alt="new list icon" class="list__plus-icon">
+        </button>
         <router-link v-for="list in lists" v-bind:key="list.listId" class="list__link" :to="{ name: 'ListItem', params: { listId: list.listId}}" tag="li">
             {{list.name}}
         </router-link>
@@ -116,6 +118,15 @@ export default {
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+  }
+  &__plus-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 16px;
   }
 }
 
