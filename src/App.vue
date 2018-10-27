@@ -2,9 +2,11 @@
   <div id="app" class="container page">
     <div class="page__content">
       <ul class="page__sidebar list">
-        <button class="list__new-list" @click="makeNewList">New list
-          <img src="./assets/img/plus.svg" alt="new list icon" class="list__plus-icon">
-        </button>
+        <div class="list__new-list-wrapper">
+          <button class="list__new-list" @click="makeNewList">New list
+            <img src="./assets/img/plus.svg" alt="new list icon" class="list__plus-icon">
+          </button>
+        </div>
         <router-link v-for="list in lists" v-bind:key="list.listId" class="list__link" :to="{ name: 'ListItem', params: { listId: list.listId}}" tag="li">
             {{list.name}}
         </router-link>
@@ -105,6 +107,9 @@ export default {
     color: $brown-border-color;
     cursor: pointer;
   }
+  &__new-list-wrapper {
+    flex-basis: 100%;
+  }
   &__new-list {
     width: 100%;
     height: 32px;
@@ -121,7 +126,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 70%;
+    width: 100%;
   }
   &__plus-icon {
     width: 20px;
@@ -167,6 +172,9 @@ export default {
 @media (min-width: $tablet) {
   .list {
     display: block;
+    &__new-list {
+      width: 70%;
+    }
   }
   .page {
     &__content {
