@@ -17,7 +17,7 @@
         </span>
       </div>
       <div class="todo__field todo__field--editing" v-else>
-        <div class="todo__checked-wrapper"></div>
+        <div class="todo__checked-wrapper todo__checked-wrapper--editing"></div>
         <input class="todo__edit-input" type="text" @keyup.enter="editTodoTitle" v-model="title">
       </div>
     
@@ -73,6 +73,8 @@ export default {
     width: 100%;
     &\--editing {
       background-color: #efefef;
+      padding-right: 16px;
+      padding-left: 16px;
     }
   }
   &__checked-wrapper {
@@ -82,6 +84,9 @@ export default {
     height: 100%;
     position: relative;
     flex-shrink: 0;
+    &\--editing {
+      display: none;
+    }
   }
   &__checkbox {
     opacity: 0;
@@ -121,11 +126,10 @@ export default {
     min-height: 32px;
     font-size: 24px;
     padding-left: 16px;
-    flex-grow: 1;
-    flex-shrink: 0;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 16px;
+    display: block;
+    width: 100%;
+    flex-shrink: 1;
+    margin: auto;
   }
   &__delete {
     position: absolute;
@@ -142,11 +146,17 @@ export default {
   }
 
   @media (min-width: $tablet) {
+    &__field\--editing {
+      padding-left: 0;
+    }
     &__delete {
       display: none;
       &:hover {
         display: block;
       }
+    }
+    &__checked-wrapper\--editing {
+      display: block;
     }
   }
 }

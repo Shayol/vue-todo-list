@@ -188,7 +188,8 @@ export default {
   &__edit-input {
     height: 32px;
     font-size: 24px;
-    flex-grow: 1;
+    display: block;
+    width: 100%;
     flex-shrink: 0;
     margin-top: 0;
     margin-bottom: 0;
