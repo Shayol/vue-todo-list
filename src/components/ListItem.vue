@@ -1,4 +1,5 @@
 <template>
+<div class="page__main main">
   <div class="list__item">
     <p v-show="error" class="list__alert">
       {{error}}
@@ -12,9 +13,9 @@
       </span>
     </div>
     <div v-else class="list__name-wrapper">
-      <input ref="listedit" class="list__edit-input" type="text" @keyup.enter="editList" v-model="name" placeholder="list name...">
+      <input ref="listedit" class="list__edit-input" type="text" @keyup.enter="editList" v-model.trim="name" placeholder="list name...">
     </div>
-    <div class="list__content">
+    <div v-if="(name == list.name) && list.listId" class="list__content">
 
       <Input v-bind:list="list"/>
 
@@ -38,6 +39,7 @@
     </div>
     
   </div>
+</div>
 </template>
 
 <script>
@@ -150,8 +152,6 @@ export default {
     error: function() {
       if (this.sameNameError) {
         return this.sameNameError;
-      } else if (!this.list.listId) {
-        return "Please give your list a name before adding todos";
       } else {
         return false;
       }
@@ -163,6 +163,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 @import "@/assets/scss/main.scss";
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-grow: 1;
+}
 .list {
   &__item {
     width: 100%;
@@ -284,6 +290,11 @@ export default {
 }
 
 @media (min-width: $tablet) {
+  .main {
+    margin-left: 5%;
+    flex-basis: 75%;
+    flex-grow: 1;
+  }
   .list {
     &__item {
       margin-top: 0;

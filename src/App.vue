@@ -12,9 +12,8 @@
         </router-link>
         
       </ul>
-      <div class="page__main main">
-        <router-view></router-view>
-      </div>
+      
+        <router-view :key="$route.fullPath"></router-view>
     </div>
     <div class="footer">
       <p class="footer__source-code">
@@ -54,7 +53,7 @@ export default {
   },
   methods: {
     makeNewList: function() {
-      this.$router.push("/");
+      this.$router.push("/new_list");
     }
   }
 };
@@ -71,11 +70,6 @@ export default {
   background-image: url("./assets/img/background-textures.png");
 }
 
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
 .page {
   display: flex;
   flex-direction: column;
@@ -88,10 +82,6 @@ export default {
   &__sidebar {
     display: block;
   }
-}
-
-.page__main {
-  flex-grow: 1;
 }
 
 .list {
@@ -172,8 +162,10 @@ export default {
 @media (min-width: $tablet) {
   .list {
     display: block;
+
     &__new-list {
-      width: 70%;
+      width: 25%;
+      min-width: 200px;
     }
   }
   .page {
@@ -183,9 +175,7 @@ export default {
     }
     &__sidebar {
       flex-basis: 30%;
-    }
-    &__main {
-      margin-left: 5%;
+      flex-grow: 1;
     }
   }
 }
