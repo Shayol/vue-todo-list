@@ -13,7 +13,7 @@
       </span>
     </div>
     <div v-else class="list__name-wrapper">
-      <input ref="listedit" class="list__edit-input" type="text" @keyup.enter="editList" v-model.trim="name" placeholder="list name...">
+      <input ref="listedit" maxlength="300" class="list__edit-input" type="text" @keyup.enter="editList" v-model.trim="name" placeholder="list name...">
     </div>
     <div v-if="(name == list.name) && list.listId" class="list__content">
 
@@ -57,7 +57,7 @@ export default {
       new: false,
       name: "",
       filter: "All",
-      sameNameError: ""
+      error: ""
     };
   },
   components: {
@@ -93,15 +93,18 @@ export default {
       this.name = this.list.name;
     },
     editList: function() {
+      this.error = "";
+      if (!this.name) {
+        this.error = "List name should have at least one character.";
+        return;
+      }
       if (!this.list.listId) {
         if (Store.findListByName(this.name)) {
-          this.sameNameError = `There is already a list with '${
+          this.error = `There is already a list with '${
             this.name
           }' name. Please, give your list unique name.`;
           return;
         } else {
-          this.sameNameError = false;
-
           let createdList = {
             name: this.name,
             listId: new Date().getTime(),
@@ -148,13 +151,6 @@ export default {
     },
     todosCompleted: function() {
       return this.list.todos.filter(el => el.checked).length;
-    },
-    error: function() {
-      if (this.sameNameError) {
-        return this.sameNameError;
-      } else {
-        return false;
-      }
     }
   }
 };

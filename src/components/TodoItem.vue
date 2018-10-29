@@ -18,7 +18,7 @@
       </div>
       <div class="todo__field todo__field--editing" v-else>
         <div class="todo__checked-wrapper todo__checked-wrapper--editing"></div>
-        <input class="todo__edit-input" type="text" @keyup.enter="editTodoTitle" v-model="title">
+        <input class="todo__edit-input" type="text" maxlength="300" @keyup.enter="editTodoTitle" v-model.trim="title">
       </div>
     
   </div>
@@ -50,8 +50,10 @@ export default {
       Store.deleteTodo(this.listId, this.todoId);
     },
     editTodoTitle: function() {
-      Store.editTodoTitle(this.listId, this.todoId, this.title);
-      this.editing = !this.editing;
+      if (this.title) {
+        Store.editTodoTitle(this.listId, this.todoId, this.title);
+        this.editing = !this.editing;
+      }
     },
     editTodoChecked: function() {
       Store.editTodoChecked(this.listId, this.todoId, this.checked);

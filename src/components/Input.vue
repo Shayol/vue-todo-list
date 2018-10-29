@@ -2,7 +2,7 @@
   <div class="input">
     <div class="input__decor-padding"></div>
     <div class="input__input-wrapper">
-       <input class="input__field" @keyup.enter="create" v-model="title" type="text" placeholder="What needs to be done?">
+       <input class="input__field" maxlength="300" @keyup.enter="create" v-model="title" type="text" placeholder="What needs to be done?">
        <div @click="create" class="input__left-icon"></div>
     </div>
     
