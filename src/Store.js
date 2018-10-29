@@ -1,7 +1,10 @@
 export default {
+    save: function () {
+        localStorage.setItem("todoStorage", JSON.stringify(this.lists));
+    },
     makeNewList: function (list) {
         this.lists.push(list);
-        localStorage.setItem("todoStorage", JSON.stringify(this.lists));
+        this.save();
     },
     findList: function (id) {
         return this.lists.find(el => el.listId == id);
@@ -13,7 +16,7 @@ export default {
         let list = this.findList(listId);
         if (list) {
             list.name = name;
-            localStorage.setItem("todoStorage", JSON.stringify(this.lists));
+            this.save();
         }
     },
     deleteList: function (listId) {
@@ -21,7 +24,7 @@ export default {
         let index = this.lists.indexOf(list);
         if (index > -1) {
             this.lists.splice(index, 1);
-            localStorage.setItem("todoStorage", JSON.stringify(this.lists));
+            this.save();
         }
     },
     findTodo: function (listId, todoId) {
@@ -35,20 +38,20 @@ export default {
             checked: false,
             editing: false
         });
-        localStorage.setItem("todoStorage", JSON.stringify(this.lists));
+        this.save();
     },
     editTodoTitle: function (listId, todoId, title) {
         let todo = this.findTodo(listId, todoId);
         if (todo) {
             todo.title = title;
-            localStorage.setItem("todoStorage", JSON.stringify(this.lists));
+            this.save();
         }
     },
     editTodoChecked: function (listId, todoId, checked) {
         let todo = this.findTodo(listId, todoId);
         if (todo) {
             todo.checked = checked;
-            localStorage.setItem("todoStorage", JSON.stringify(this.lists));
+            this.save();
         }
     },
     deleteTodo: function (listId, todoId) {
@@ -57,7 +60,7 @@ export default {
             let list = this.findList(listId);
             let index = list.todos.indexOf(todo);
             list.todos.splice(index, 1);
-            localStorage.setItem("todoStorage", JSON.stringify(this.lists));
+            this.save();
         }
     },
     lists: [

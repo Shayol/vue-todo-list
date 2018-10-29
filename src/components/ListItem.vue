@@ -57,7 +57,8 @@ export default {
       new: false,
       name: "",
       filter: "All",
-      error: ""
+      error: "",
+      store: Store
     };
   },
   components: {
