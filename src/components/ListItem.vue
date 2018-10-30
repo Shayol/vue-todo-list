@@ -301,10 +301,10 @@ export default {
       flex-basis: auto;
       margin-right: -10%;
     }
-    @media (hover: hover) {
+    @media (pointer: fine) and (hover: hover) {
       &__delete {
         display: none;
-        top: 0;
+        top: 8px;
         &:hover {
           display: block;
         }

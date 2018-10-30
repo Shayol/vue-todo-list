@@ -150,7 +150,7 @@ export default {
     &__checked-wrapper\--editing {
       display: block;
     }
-    @media (hover: hover) {
+    @media (pointer: fine) and (hover: hover) {
       &__delete {
         display: none;
         &:hover {
