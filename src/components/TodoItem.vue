@@ -118,11 +118,6 @@ export default {
     font-size: 16px;
     color: $dark-brown;
     word-wrap: break-word;
-    &:hover {
-      ~ .todo__delete {
-        display: block;
-      }
-    }
   }
   &__edit-input {
     min-height: 32px;
@@ -151,14 +146,24 @@ export default {
     &__field\--editing {
       padding-left: 0;
     }
-    &__delete {
-      display: none;
-      &:hover {
-        display: block;
-      }
-    }
+
     &__checked-wrapper\--editing {
       display: block;
+    }
+    @media (hover: hover) {
+      &__delete {
+        display: none;
+        &:hover {
+          display: block;
+        }
+      }
+      &__title {
+        &:hover {
+          ~ .todo__delete {
+            display: block;
+          }
+        }
+      }
     }
   }
 }

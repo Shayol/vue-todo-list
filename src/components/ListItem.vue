@@ -178,9 +178,6 @@ export default {
     color: $dark-brown;
     text-align: center;
     text-shadow: 2px 2px 8px $grey-border-color;
-    &:hover ~ .list__delete {
-      display: block;
-    }
   }
   &__edit-input {
     height: 32px;
@@ -290,10 +287,10 @@ export default {
     &__item {
       margin-top: 0;
     }
-    &__delete {
-      right: 30px;
-      top: 50%;
-      transform: translateY(-50%);
+    &__name-wrapper {
+      &:hover .list__delete {
+        display: block;
+      }
     }
     &__number {
       font-size: 12px;
@@ -304,10 +301,13 @@ export default {
       flex-basis: auto;
       margin-right: -10%;
     }
-    &__delete {
-      display: none;
-      &:hover {
-        display: block;
+    @media (hover: hover) {
+      &__delete {
+        display: none;
+        top: 0;
+        &:hover {
+          display: block;
+        }
       }
     }
   }
