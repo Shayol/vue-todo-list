@@ -1,26 +1,25 @@
 <template>
   <div class="todo">
 
-    
-      <div class="todo__field" v-if="!editing">
+    <div class="todo__field" v-if="!editing">
 
-        <div class="todo__checked-wrapper">
-          <input type="checkbox" name="checked" class="todo__checkbox" @change="editTodoChecked" v-model="checked">
-          <div class="todo__check">&#10004;</div>
-        </div>
-      
-        <p class="todo__title" @click="editing=!editing" :class="{todo__completed: checked}">
-            {{title}} 
-        </p>
-        <span class="todo__delete" @click="deleteTodo()">
-          &#10005;
-        </span>
+      <div class="todo__checked-wrapper">
+        <input type="checkbox" name="checked" class="todo__checkbox" @change="editTodoChecked" v-model="checked">
+        <div class="todo__check">&#10004;</div>
       </div>
-      <div class="todo__field todo__field--editing" v-else>
-        <div class="todo__checked-wrapper todo__checked-wrapper--editing"></div>
-        <input class="todo__edit-input" type="text" maxlength="300" @keyup.enter="editTodoTitle" v-model.trim="title">
-      </div>
-    
+
+      <p class="todo__title" @click="editing=!editing" :class="{todo__completed: checked}">
+        {{title}}
+      </p>
+      <span class="todo__delete" @click="deleteTodo()">
+        &#10005;
+      </span>
+    </div>
+    <div class="todo__field todo__field--editing" v-else>
+      <div class="todo__checked-wrapper todo__checked-wrapper--editing"></div>
+      <input class="todo__edit-input" type="text" maxlength="300" @keyup.enter="editTodoTitle" v-model.trim="title">
+    </div>
+
   </div>
 </template>
 
@@ -118,6 +117,7 @@ export default {
     padding: 0 16px;
     font-size: 16px;
     color: $dark-brown;
+    word-wrap: break-word;
     &:hover {
       ~ .todo__delete {
         display: block;
